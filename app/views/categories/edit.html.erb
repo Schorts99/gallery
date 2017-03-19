@@ -1,0 +1,31 @@
+<h2>Editar categoría</h2>
+<%= form_for @category do |f| %>
+  <% if @category.errors.any? %>
+    <% @category.errors.full_message.each do |msg| %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :name, "Nombre" %>
+    <%= f.text_field :name, class:"form-control" %>
+  </div>
+  <br>
+  <%= f.submit "Actualizar", class:"btn btn-primary" %>
+  <%= link_to "Cancelar", categories_path, class:"btn btn-default" %>
+<% end %>
+<h3 class="page-header">Imagenes en <%= @category.name %></h3>
+<div id="edit_images">
+  <% @images.each_slice(6) do |image| %>
+    <div class="row">
+      <% image.each do |image| %>
+        <div class="col-md-2">
+          <%= image_tag image.image_url(:thumb) %>
+          <center><%= link_to "Eliminar", image_path(image), class:'delete',
+          method: :delete, data: { confirm: "Estas seguro?" } %></center>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
