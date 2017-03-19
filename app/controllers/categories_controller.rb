@@ -5,9 +5,9 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    if category.save
+    if @category.save
       flash[:notice] = "Categoría agregada"
-      redirect_to categories_path
+      redirect_to root_path
     else
       render 'new'
     end
